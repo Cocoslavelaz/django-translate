@@ -8,6 +8,7 @@ def index(request):
     T_REGION = 'eastus' # 填入位置/區域
     T_KEY = '8172170dfee1419e96108bfd158af72e' # 填入金鑰
     T_ENDPOINT = 'https://api.cognitive.microsofttranslator.com/' # 填入文字翻譯的 Web API
+    output = ""
     if request.method == "POST":
         word = request.POST.get('word',None)
         text_translator = TextTranslationClient(
