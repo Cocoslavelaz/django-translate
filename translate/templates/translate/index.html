@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>hello</h2>
+    <form action="/index/" method="post">
+        {%  csrf_token %}
+        <p>翻譯的文字:</p>
+        <p><input type="text" name="word"></p>
+        <p><input type="submit"></p>       
+    </form>
+    <h2>{{  text }}</h2>
+    
+</body>
+</html>
