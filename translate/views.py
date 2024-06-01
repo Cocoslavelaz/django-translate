@@ -11,18 +11,31 @@ def index(request):
     output = ""
     if request.method == "POST":
         word = request.POST.get('word',None)
+        lang = request.POST.get('language',None)
         text_translator = TextTranslationClient(
         endpoint=T_ENDPOINT,
         credential=TranslatorCredential(T_KEY, T_REGION)
     )
         targets = []
         targets.append(InputTextItem(text=word))
-        responses = text_translator.translate(content=targets, to=["zh-hant"], from_parameter="en")
-        output = responses[0]["translations"][0]["text"]
-        print(output)
+        if lang == "l1":
+            responses = text_translator.translate(content=targets, to=["zh-hant"], from_parameter="en")
+            output = responses[0]["translations"][0]["text"]
+        elif lang == "l2":
+            responses = text_translator.translate(content=targets, to=["en"], from_parameter="zh-hant")
+            output = responses[0]["translations"][0]["text"]
+        elif lang == "l3":
+            responses = text_translator.translate(content=targets, to=["zh-hant"], from_parameter="ja")
+            output = responses[0]["translations"][0]["text"]
+        elif lang == "l4":
+            responses = text_translator.translate(content=targets, to=["ja"], from_parameter="zh-hant")
+            output = responses[0]["translations"][0]["text"]
+
     args = {"text":output}
 
 
     
 
     return render(request,'./translate/index.html',args)
+
+
